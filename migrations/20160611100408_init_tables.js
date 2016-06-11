@@ -24,7 +24,8 @@ exports.up = function(knex, Promise) {
       table.integer('band2_id')
       table.foreign('band1_id').references('id').inTable('bands')
       table.foreign('band2_id').references('id').inTable('bands')
-      table.integer('winner')
+      table.integer('band1_score')
+      table.integer('band2_score')
     })
   ])
 };
