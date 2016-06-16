@@ -24,10 +24,15 @@ exports.seed = function(knex, Promise) {
               .insert([{ name: 'TBD' }, { name: 'TBD' }], 'id')
               .then(records => {
                 console.log('new bands: ', records)
+                if (records.length === 1) {
+                  // if only one is provided, it's the last ID
+                  records[1] = records[0]
+                  records[0] = records[1] - 1
+                }
                 return knex('matches')
                   .update({
                     band1_id: records[0],
-                    band2_id: records[1] || records[0] + 1
+                    band2_id: records[1]
                   })
                   .where({ id: m.id })
               })

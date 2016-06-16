@@ -1,0 +1,10 @@
+{
+  "index": "number",
+  "time": "date",
+  "location": "string",
+  "band1_score": "number",
+  "band2_score": "number",
+  "round": { "type": "rounds", "relationship": "belongsTo" },
+  "band1": { "type": "bands", "relationship": "belongsTo" },
+  "band2": { "type": "bands", "relationship": "belongsTo" }
+}

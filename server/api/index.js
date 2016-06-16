@@ -2,8 +2,10 @@ var express = require('express')
 var router = module.exports = express.Router()
 var db = require('../lib/db')
 var Promise = require('bluebird')
+var JSONAPI = require('jsonapi-express')
+var JSONAPIOperations = require('../lib/JSONAPIOperations')
 
-router.use('/rounds', require('./rounds'))
+router.use('/', JSONAPI(JSONAPIOperations, '/api'))
 
 const winning_score = 15
 function getWinner(round) {

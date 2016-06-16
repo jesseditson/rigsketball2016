@@ -14,13 +14,14 @@
   },
   "repository": "",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4.0.0"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
     "ember-ajax": "0.7.1",
+    "ember-browserify": "1.1.9",
     "ember-cli": "2.4.3",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-babel": "^5.1.6",
@@ -28,6 +29,7 @@
     "ember-cli-htmlbars": "^1.0.3",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-inject-live-reload": "^1.4.0",
+    "ember-cli-json-module": "0.0.2",
     "ember-cli-qunit": "^1.4.0",
     "ember-cli-release": "0.2.8",
     "ember-cli-sri": "^2.1.0",
@@ -42,6 +44,7 @@
     "sqlite3": "^3.1.4"
   },
   "dependencies": {
+    "jsonapi-express": "^0.0.1",
     "knex": "^0.11.5",
     "pg": "^5.1.0"
   }
