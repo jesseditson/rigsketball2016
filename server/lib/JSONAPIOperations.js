@@ -13,6 +13,20 @@ var db = require('./db')
  * hasMany relationships can define `through` relationships, which must be defined as schemas.
  */
 
+function query(type, fields, filter) {
+  var qb = db(type)
+  if (filter.join) {
+    qb
+      .select(filter.join.fields)
+      .leftOuterJoin(filter.join.table, filter.join.left, filter.join.right)
+  } else {
+    qb.select(fields)
+  }
+  if (filter.params) qb.where(filter.params)
+  if (filter.query) qb.where(filter.query)
+  return qb
+}
+
 /**
  * findAll - return an array of objects matching the type and filter, returning only the fields specified.
  *
@@ -22,11 +36,7 @@ var db = require('./db')
  * @return {Promise}              A promise that resolves with an object containing data (and optionally relationships)
  */
 module.exports.findAll = function(type, fields, filter) {
-  var qb = db(type)
-    .select(fields)
-  if (filter.params) qb.where(filter.params)
-  if (filter.query) qb.where(filter.query)
-  return qb
+  return query(type, fields, filter)
 }
 
 /**
@@ -38,11 +48,7 @@ module.exports.findAll = function(type, fields, filter) {
  * @return {Promise}              A promise that resolves with an object containing data (and optionally relationships)
  */
 module.exports.findOne = function(type, fields, filter) {
-  var qb = db(type)
-    .select(fields)
-  if (filter.params) qb.where(filter.params)
-  if (filter.query) qb.where(filter.query)
-  return qb.first()
+  return query(type, fields, filter).first()
 }
 
 /**
