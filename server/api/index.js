@@ -8,7 +8,6 @@ var JSONAPIOperations = require('../lib/JSONAPIOperations')
 JSONAPIOperations.sideEffects = {
   matches: {
     update(info) {
-      console.log('recalculating matches...')
       return recalculateMatches().then(() => info)
     }
   }

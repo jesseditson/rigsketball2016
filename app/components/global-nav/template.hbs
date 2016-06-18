@@ -1,0 +1,11 @@
+{{log route}}
+{{#unless (eq route "signup")}}
+  {{#link-to "signup"}}
+    <span class="button">sign up</span>
+  {{/link-to}}
+{{else}}
+  <a href="javascript:history.back();">
+    <span class="button">back</span>
+  </a>
+{{/unless}}
+{{yield}}

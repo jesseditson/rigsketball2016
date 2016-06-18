@@ -4,6 +4,7 @@
 @import "poster";
 @import "mobile-bracket";
 @import "desktop-bracket";
+@import "forms";
 
 body {
   background-color: $bg-color;
@@ -34,12 +35,35 @@ a {
 
 input, textarea {
   border: none;
-  // border-bottom: 1px solid;
   color: $text-color;
   background-color: transparent;
   font-size: 1.5em;
   &:focus {
     outline: none;
     color: $green-color;
+  }
+}
+
+.form-group {
+  input {
+    border-bottom: 1px solid;
+  }
+}
+
+.button {
+  @include no-select;
+  @include slim-font;
+  border: 1px solid;
+  padding: 0.6em;
+  min-width: 5em;
+  cursor: pointer;
+  &:hover {
+    color: lighten($green-color, 10);
+  }
+  &:active {
+    color: darken($green-color, 30);
+  }
+  &[disabled] {
+    color: $disabled-color;
   }
 }

@@ -1,0 +1,114 @@
+<h2>sign up</h2>
+<form {{action "createBand" on="submit"}}>
+  <div class="form-group">
+    <label>
+      band name
+      {{input type="text" required=true name="band-name" value=band.name}}
+    </label>
+  </div>
+  <div class="form-group">
+    <label>
+      website
+      {{input type="url" required=true name="website" value=band.website}}
+    </label>
+  </div>
+  <div class="form-group">
+    <label>
+      bandcamp [optional]
+      {{input type="text" name="bandcamp" value=band.bandcamp}}
+    </label>
+  </div>
+  <div class="form-group">
+    <label>
+      soundcloud [optional]
+      {{input type="text" name="soundcloud" value=band.soundcloud}}
+    </label>
+  </div>
+  <div class="form-group">
+    <label>
+      phone #
+      {{input type="tel" required=true name="phone" value=band.phone}}
+    </label>
+  </div>
+  <div class="form-group">
+    <label>
+      email
+      {{input type="email" required=true name="email" value=band.email}}
+    </label>
+  </div>
+  <div class="form-group">
+    <label>
+      address
+      {{input type="text" required=true name="address" value=band.address}}
+    </label>
+  </div>
+  <div class="form-group">
+    {{ember-selectize
+      content=memberOptions
+      optionValuePath="content.value"
+      optionLabelPath="content.name"
+      placeholder="Band members"
+      required=true
+      name="member-count"
+      value=band.member_count }}
+  </div>
+  <div class="form-group info">
+    <p>DON'T BRING YOUR GIANT FRIEND! Only actual current members of your band can play in Rigsketball. This is about musicians having fun! Do you agree to not bring any “ringers” and only have actual members of your band playing?</p>
+    <p>We’re serious about this. Bim will really nicely kick you out of the tournament if you don’t follow this rule.</p>
+    <label>
+      i agree
+      {{input type="checkbox" required=true name="no-giants"}}
+    </label>
+  </div>
+  <div class="form-group">
+    <label>
+      track for the 2016 compilation
+      {{#pl-uploader for="upload-track" name="track-upload" extensions="mp3" onfileadd="uploadTrack" as |queue dropzone|}}
+        <div class="dropzone" id={{dropzone.id}}>
+          {{#if dropzone.active}}
+            {{#if dropzone.valid}}
+              Drop to upload
+            {{else}}
+              Invalid
+            {{/if}}
+          {{else if queue.length}}
+            {{log queue.queues}}
+            <span class="progress">({{queue.progress}}%)</span>
+          {{else}}
+            <a id="upload-track">[select a file]</a>
+          {{/if}}
+        </div>
+      {{/pl-uploader}}
+    </label>
+  </div>
+  <div class="form-group">
+    <label>
+      band photo
+      {{#pl-uploader for="upload-image" name="image-upload" extensions="jpg jpeg png gif" onfileadd="uploadImage" as |queue dropzone|}}
+        <div class="dropzone" id={{dropzone.id}}>
+          {{#if dropzone.active}}
+            {{#if dropzone.valid}}
+              Drop to upload
+            {{else}}
+              Invalid
+            {{/if}}
+          {{else if queue.length}}
+            <span class="progress">({{queue.progress}}%)</span>
+          {{else}}
+            <a id="upload-image">[select a file]</a>
+          {{/if}}
+        </div>
+      {{/pl-uploader}}
+    </label>
+  </div>
+  <div class="form-group check">
+    <label>
+      {{input type="checkbox" required=true name="terms"}}
+      <span>I agree to the 2015 Rigsketball Compilation {{#link-to "compilation-terms"}}terms and conditions{{/link-to}}</span>
+    </label>
+  </div>
+  <div class="form-group button-group">
+    {{input type="submit" value=buttonTitle class="button" disabled=submitDisabled}}
+  </div>
+</form>
+{{yield}}

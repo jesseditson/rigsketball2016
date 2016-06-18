@@ -9,6 +9,8 @@ Router.map(function() {
   this.route('bracket', function() {
     this.route('round', { path: 'round/:id' });
   });
+  this.route('signup');
+  this.route('compilation-terms');
 });
 
 export default Router;

@@ -1,3 +1,14 @@
+.global-nav {
+  position: fixed;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  padding: 2em 1em;
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+}
+
 .round-nav {
   background-color: $bg-color;
   width: 100%;

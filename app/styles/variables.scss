@@ -1,6 +1,7 @@
 $bg-color: rgb(41, 41, 41);
 $text-color: white;
 $green-color: rgb(112, 202, 142);
+$disabled-color: rgba(255, 255, 255, 0.2);
 
 @mixin slim-font() {
   font-family: 'slim_joeregular', sans-serif;
@@ -8,4 +9,13 @@ $green-color: rgb(112, 202, 142);
 
 @mixin bold-font() {
   font-family: 'big_johnregular', sans-serif;
+}
+
+@mixin no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

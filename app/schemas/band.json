@@ -1,3 +1,12 @@
 {
-  "name": "string"
+  "name": "string",
+  "website": "string",
+  "bandcamp": "string",
+  "soundcloud": "string",
+  "phone": "string",
+  "email": "string",
+  "address": "string",
+  "member_count": "number",
+  "trackURL": "string",
+  "imageURL": "string"
 }
