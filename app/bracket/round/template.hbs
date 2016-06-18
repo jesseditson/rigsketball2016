@@ -1,8 +1,17 @@
 <h2>{{model.title}}</h2>
 {{#each model.matches as |match|}}
   <div class="match">
-    <h2>Match {{match.index}}</h2>
-    <h4>{{match.band1.name}} vs. {{match.band2.name}}</h4>
+    <div class="time">
+      <p>{{match.time}}</p>
+    </div>
+    <div class="location">
+      <p>{{match.location}}</p>
+    </div>
+    <div class="matchup">
+      {{match-band match=match number=1}}
+      <h4>vs.</h4>
+      {{match-band match=match number=2}}
+    </div>
   </div>
 {{/each}}
 

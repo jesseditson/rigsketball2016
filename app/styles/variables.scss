@@ -1,0 +1,11 @@
+$bg-color: rgb(41, 41, 41);
+$text-color: white;
+$green-color: rgb(112, 202, 142);
+
+@mixin slim-font() {
+  font-family: 'slim_joeregular', sans-serif;
+}
+
+@mixin bold-font() {
+  font-family: 'big_johnregular', sans-serif;
+}

@@ -1,9 +1,10 @@
-<nav>
+<nav class="round-nav">
   {{#each model as |round|}}
-    <div class="round-nav">
+    <div>
       {{#link-to 'bracket.round' round}}{{round.title}}{{/link-to}}
     </div>
   {{/each}}
 </nav>
-
-{{outlet}}
+<div class="round">
+  {{outlet}}
+</div>

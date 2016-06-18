@@ -56,13 +56,34 @@ module.exports.findOne = function(type, fields, filter) {
  * Note that this method is also expected to create relationships if specified, as per the JSONAPI spec.
  * The returned data is expected to be a
  *
+ * @param  {string} type      The type of object to create
  * @param  {object} data      A JSONAPI compatible object, including relationships
  * @return {Promise}          A promise that resolves with an object containing data (and optionally relationships)
  */
-module.exports.create = function(data) {
+module.exports.create = function(type, data) {
   return new Promise((resolve, reject) => {
     // resolve({ data: {}, related: [] })
   })
+}
+
+/**
+ * update - update an existing record
+ *
+ * @param  {string} type      The type of object to update
+ * @param  {number} id        The id of the object to update
+ * @param  {object} data      A JSONAPI compatible update object
+ * @return {Promise}          A promise that resolves with an object containing the updated object
+ */
+module.exports.update = function(type, id, data) {
+  var qb = db(type)
+    .where('id', id)
+    .update(data.data.attributes)
+  if (data.data.relationships) {
+    // TODO: handle relationships
+  }
+  return qb.then(() => {
+      return query(type, '*', { id: id }).first()
+    })
 }
 
 /**

@@ -1,0 +1,19 @@
+.round-nav {
+  background-color: $bg-color;
+  width: 100%;
+  bottom: 0px;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & > div {
+    margin: 1em;
+    font-size: 0.8em;
+  }
+}
+
+@media (min-width: 700px) {
+  .round-nav > div {
+    font-size: 1.5em;
+  }
+}

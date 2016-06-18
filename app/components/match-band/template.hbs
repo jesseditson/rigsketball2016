@@ -1,0 +1,7 @@
+{{!-- {{#if editable}} --}}
+  {{input class="score" value=score action="updateScore" on="key-up"}}
+{{!-- {{else}}
+  <h4>{{match.band1_score}}</h4>
+{{/if}} --}}
+<h4 class="band-name">{{band.name}}</h4>
+{{yield}}

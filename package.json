@@ -1,7 +1,7 @@
 {
   "name": "rigsketball2016",
   "version": "0.0.0",
-  "description": "Small description for rigsketball2016 goes here",
+  "description": "2016 Rigsketball site",
   "private": true,
   "directories": {
     "doc": "doc",
@@ -9,13 +9,12 @@
   },
   "scripts": {
     "now-start": "node index",
-    "deploy": "ember build --environment=production && now",
+    "deploy": "ember build --environment=production && rm -rf tmp && now && now alias $(pbpaste) rigsketball.com",
     "start": "ember server --output-path=dev",
     "test": "ember test"
   },
   "repository": "https://github.com/jesseditson/rigsketball2016.git",
   "author": "Jesse Ditson <jesse.ditson@gmail.com>",
-  "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
     "ember-ajax": "0.7.1",
@@ -30,6 +29,7 @@
     "ember-cli-json-module": "0.0.2",
     "ember-cli-qunit": "^1.4.0",
     "ember-cli-release": "0.2.8",
+    "ember-cli-sass": "5.3.1",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-data": "^2.4.2",

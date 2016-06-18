@@ -5,7 +5,23 @@ var Promise = require('bluebird')
 var JSONAPI = require('jsonapi-express')
 var JSONAPIOperations = require('../lib/JSONAPIOperations')
 
+JSONAPIOperations.sideEffects = {
+  matches: {
+    update(info) {
+      console.log('recalculating matches...')
+      return recalculateMatches().then(() => info)
+    }
+  }
+}
+
 router.use('/', JSONAPI(JSONAPIOperations, '/api'))
+
+router.get('/recalculate-matches', (req, res, next) => {
+  recalculateMatches()
+    .then(operations => {
+      res.status(201).json({ message: `updated ${operations.length} records.`})
+    })
+})
 
 const winning_score = 15
 function getWinner(round) {
@@ -18,8 +34,8 @@ function getWinner(round) {
   return b1s > b2s ? round.band1_id : round.band2_id
 }
 
-router.get('/recalculate-matches', (req, res, next) => {
-  db('rounds')
+function recalculateMatches() {
+  return db('rounds')
     .select('*')
     .then(rounds => {
       return rounds.reduce((o, r) => {
@@ -65,7 +81,4 @@ router.get('/recalculate-matches', (req, res, next) => {
       }
       return Promise.all(operations)
     })
-    .then(operations => {
-      res.status(201).json({ message: `updated ${operations.length} records.`})
-    })
-})
+}

@@ -1,0 +1,45 @@
+@import "fonts";
+@import "variables";
+@import "nav";
+@import "poster";
+@import "mobile-bracket";
+@import "desktop-bracket";
+
+body {
+  background-color: $bg-color;
+  color: $text-color;
+  @include slim-font;
+  margin: 0;
+  margin-bottom: 100px;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  z-index: -1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('/assets/img/van.png');
+}
+
+a {
+  color: $green-color;
+  text-decoration: none;
+}
+
+input, textarea {
+  border: none;
+  // border-bottom: 1px solid;
+  color: $text-color;
+  background-color: transparent;
+  font-size: 1.5em;
+  &:focus {
+    outline: none;
+    color: $green-color;
+  }
+}
