@@ -8,15 +8,13 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "ember build",
-    "start": "ember server",
+    "now-start": "node index",
+    "deploy": "ember build --environment=production && now",
+    "start": "ember server --output-path=dev",
     "test": "ember test"
   },
-  "repository": "",
-  "engines": {
-    "node": ">= 4.0.0"
-  },
-  "author": "",
+  "repository": "https://github.com/jesseditson/rigsketball2016.git",
+  "author": "Jesse Ditson <jesse.ditson@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
@@ -44,6 +42,7 @@
     "sqlite3": "^3.1.4"
   },
   "dependencies": {
+    "express": "^4.14.0",
     "jsonapi-express": "^0.0.1",
     "knex": "^0.11.5",
     "pg": "^5.1.0"

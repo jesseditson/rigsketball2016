@@ -1,5 +1,7 @@
 var express = require('express')
+var path = require('path')
 var emberServer = require('./server')
+var pkgInfo = require('./package.json')
 
 var app = module.exports = express()
 
@@ -15,11 +17,11 @@ app.use((req, res) => res.sendFile(indexFile))
 emberServer(app)
 
 app.serve = function() {
-  this.set('port', this.get('port') || process.env.PORT || 80)
+  this.set('port', this.get('port') || process.env.PORT || 3000)
   this.set('host', this.get('host') || process.env.HOST || '0.0.0.0')
 
   var server = this.listen(this.get('port'), this.get('host'), function() {
-    debug(`Server running on port ${server.address().port}`)
+    console.log(`Server running on port ${server.address().port}`)
   })
   return server
 }
