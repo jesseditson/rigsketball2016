@@ -11,6 +11,7 @@
   max-width: 600px;
   padding: 1em;
   box-sizing: border-box;
+  justify-content: space-between;
   .matchup {
     display: flex;
     justify-content: space-between;
@@ -19,18 +20,23 @@
   .match-band {
     display: flex;
     align-items: center;
+    flex-grow: 2;
+    .selectize-control {
+      flex-grow: 2;
+    }
   }
   .band2 {
     flex-direction: row-reverse;
     justify-content: flex-end;
-    * {
+    .band-name {
       text-align: right;
     }
   }
   .band-name {
     margin: 0 1em;
+    flex-grow: 2;
   }
   .score {
-    width: 2em;
+    width: 1em;
   }
 }

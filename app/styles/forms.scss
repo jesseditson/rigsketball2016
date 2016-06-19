@@ -50,9 +50,10 @@ form {
 
 /** Selectize **/
 
-.form-group {
+.content {
   .selectize-control.single, .selectize-control {
     .selectize-input {
+      width: 100%;
       border: none;
       background-color: transparent;
       box-shadow: none;

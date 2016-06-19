@@ -2,6 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model(params) {
-    return this.store.findAll('round')
+    return Ember.RSVP.hash({
+      rounds: this.store.findAll('round')
+    })
+  },
+  redirect(model) {
+    this.transitionTo('bracket.round', model.rounds.get('firstObject'))
   }
 });

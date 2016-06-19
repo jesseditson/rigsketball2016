@@ -1,5 +1,5 @@
 <nav class="round-nav">
-  {{#each model as |round|}}
+  {{#each model.rounds as |round|}}
     <div>
       {{#link-to 'bracket.round' round}}{{round.title}}{{/link-to}}
     </div>

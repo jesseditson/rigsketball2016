@@ -3,5 +3,17 @@
 {{!-- {{else}}
   <h4>{{match.band1_score}}</h4>
 {{/if}} --}}
-<h4 class="band-name">{{band.name}}</h4>
+{{!-- {{#unless (eq match.round.id '1')}} --}}
+  <h4 class="band-name">{{band.name}}</h4>
+{{!-- {{else}}
+  {{ember-selectize
+    content=bands
+    optionValuePath="content.id"
+    optionLabelPath="content.name"
+    placeholder="switch band"
+    name="band"
+    select-item="updateBand"
+    value=band
+  }}
+{{/unless}} --}}
 {{yield}}

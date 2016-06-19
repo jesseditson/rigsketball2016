@@ -3,6 +3,15 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['match-band'],
   classNameBindings: ['bandClass'],
+  store: Ember.inject.service(),
+  init() {
+    this._super(...arguments)
+    // TODO: don't re-fetch these, perhaps inject at route level.
+    this.get('store').findAll('band').then(bands => {
+      this.set('bands', bands)
+    })
+  },
+  bands: [],
   bandClass: Ember.computed('number', function() {
     var n = this.get('number')
     return `band${n}`
@@ -21,6 +30,11 @@ export default Ember.Component.extend({
       var n = this.get('number')
       model.set(`band${n}_score`, score)
       model.save()
+    },
+    updateBand(band) {
+      var model = this.get('match')
+      var n = this.get('number')
+      model.set(`band${n}`, band)
     }
   }
 });
