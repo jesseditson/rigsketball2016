@@ -11,6 +11,7 @@ Router.map(function() {
   });
   this.route('signup');
   this.route('compilation-terms');
+  this.route('login');
 });
 
 export default Router;

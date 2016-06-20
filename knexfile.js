@@ -1,4 +1,4 @@
-// Update with your config settings.
+var secrets = require('./server/lib/secrets')
 
 module.exports = {
 
@@ -30,9 +30,10 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      host: secrets.database_host,
+      database: secrets.database_name,
+      user: secrets.database_user,
+      password: secrets.database_password
     },
     pool: {
       min: 2,

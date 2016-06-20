@@ -1,10 +1,25 @@
 
 exports.up = function(knex, Promise) {
   return Promise.all([
+    knex.schema.createTable('users', table => {
+      table.increments()
+      table.timestamps()
+      table.string('email')
+      table.string('password')
+    }),
     knex.schema.createTable('bands', table => {
       table.increments()
       table.timestamps()
       table.string('name')
+      table.string('website')
+      table.string('bandcamp')
+      table.string('soundcloud')
+      table.string('phone')
+      table.string('email')
+      table.string('address')
+      table.string('member_count')
+      table.string('trackURL')
+      table.string('imageURL')
     }),
     knex.schema.createTable('rounds', table => {
       table.increments()

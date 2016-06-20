@@ -8,6 +8,7 @@ module.exports = function(app) {
 
   // Logging
   app.use(morgan('dev'));
+  app.use(bodyParser.urlencoded())
   // Support for jsonAPI header
   app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
 

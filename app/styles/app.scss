@@ -6,12 +6,17 @@
 @import "desktop-bracket";
 @import "forms";
 
+body, html, body > .ember-view, .content {
+  height: 100%;
+  box-sizing: border-box;
+}
+
 body {
   background-color: $bg-color;
   color: $text-color;
   @include slim-font;
   margin: 0;
-  margin-bottom: 100px;
+  padding-bottom: 100px;
 }
 body::before {
   content: "";
@@ -26,6 +31,13 @@ body::before {
   background-repeat: no-repeat;
   background-position: center;
   background-image: url('/assets/img/van.png');
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 a {
