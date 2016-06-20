@@ -18,8 +18,8 @@ exports.up = function(knex, Promise) {
       table.string('email')
       table.string('address')
       table.string('member_count')
-      table.string('trackURL')
-      table.string('imageURL')
+      table.string('track_url')
+      table.string('image_url')
     }),
     knex.schema.createTable('rounds', table => {
       table.increments()
@@ -49,6 +49,7 @@ exports.down = function(knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('bands'),
     knex.schema.dropTable('rounds'),
-    knex.schema.dropTable('matches')
+    knex.schema.dropTable('matches'),
+    knex.schema.dropTable('users')
   ])
 };

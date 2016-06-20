@@ -7,6 +7,6 @@ export default Ember.Route.extend({
     })
   },
   redirect(model) {
-    this.transitionTo('bracket.round', model.rounds.get('firstObject'))
+    this.transitionTo('bracket.round', model.rounds.get('firstObject.id'))
   }
 });

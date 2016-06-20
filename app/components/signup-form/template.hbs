@@ -63,42 +63,29 @@
   <div class="form-group">
     <label>
       track for the 2016 compilation
-      {{#pl-uploader for="upload-track" name="track-upload" extensions="mp3" onfileadd="uploadFile" as |queue dropzone|}}
-        <div class="dropzone" id={{dropzone.id}}>
-          {{#if dropzone.active}}
-            {{#if dropzone.valid}}
-              Drop to upload
-            {{else}}
-              Invalid
-            {{/if}}
-          {{else if queue.length}}
-            {{log queue.queues}}
-            <span class="progress">[{{queue.progress}}%]</span>
-          {{else}}
-            <a id="upload-track">[select a file]</a>
-          {{/if}}
-        </div>
-      {{/pl-uploader}}
+      {{#x-file-input name="upload-image" action="uploadTrack" accept="audio/*" alt="Choose a File"}}
+        {{#if uploadingTrack}}
+          <a>[uploading]</a>
+        {{else if band.trackURL}}
+          <a>[√]</a>
+        {{else}}
+          <a>[select a file]</a>
+        {{/if}}
+      {{/x-file-input}}
     </label>
   </div>
   <div class="form-group">
     <label>
       band photo
-      {{#pl-uploader for="upload-image" name="image-upload" extensions="jpg jpeg png gif" onfileadd="uploadFile" as |queue dropzone|}}
-        <div class="dropzone" id={{dropzone.id}}>
-          {{#if dropzone.active}}
-            {{#if dropzone.valid}}
-              Drop to upload
-            {{else}}
-              Invalid
-            {{/if}}
-          {{else if queue.length}}
-            <span class="progress">[{{queue.progress}}%]</span>
-          {{else}}
-            <a id="upload-image">[select a file]</a>
-          {{/if}}
-        </div>
-      {{/pl-uploader}}
+      {{#x-file-input name="upload-image" action="uploadImage" accept="image/*" alt="Choose a File"}}
+        {{#if uploadingPhoto}}
+          <a>[uploading]</a>
+        {{else if band.imageURL}}
+          <a>[√]</a>
+        {{else}}
+          <a>[select a file]</a>
+        {{/if}}
+      {{/x-file-input}}
     </label>
   </div>
   <div class="form-group check">

@@ -6,9 +6,13 @@
 @import "desktop-bracket";
 @import "forms";
 
-body, html, body > .ember-view, .content {
+body, html {
   height: 100%;
   box-sizing: border-box;
+}
+
+body > .ember-view, .content {
+  min-height: 100%;
 }
 
 body {

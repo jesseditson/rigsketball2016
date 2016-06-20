@@ -1,4 +1,3 @@
-{{log route}}
 {{#unless (eq route "signup")}}
   {{#link-to "signup"}}
     <span class="button">sign up</span>
@@ -8,4 +7,9 @@
     <span class="button">back</span>
   </a>
 {{/unless}}
+{{#if loggedIn}}
+<a {{action "logout"}}>
+  <span class="button">log out</span>
+</a>
+{{/if}}
 {{yield}}

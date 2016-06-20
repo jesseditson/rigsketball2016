@@ -1,11 +1,11 @@
-{{!-- {{#if editable}} --}}
+{{#if canEdit}}
   {{input class="score" value=score action="updateScore" on="key-up"}}
-{{!-- {{else}}
-  <h4>{{match.band1_score}}</h4>
-{{/if}} --}}
-{{!-- {{#unless (eq match.round.id '1')}} --}}
+{{else}}
+  <h4>{{score}}</h4>
+{{/if}}
+{{#unless (eq match.round.id '1')}}
   <h4 class="band-name">{{band.name}}</h4>
-{{!-- {{else}}
+{{else}}
   {{ember-selectize
     content=bands
     optionValuePath="content.id"
@@ -15,5 +15,5 @@
     select-item="updateBand"
     value=band
   }}
-{{/unless}} --}}
+{{/unless}}
 {{yield}}

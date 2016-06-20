@@ -7,10 +7,10 @@ export default Ember.Component.extend({
   session: Ember.inject.service(),
   init() {
     this._super(...arguments)
-    // TODO: don't re-fetch these, perhaps inject at route level.
-    this.get('store').findAll('band').then(bands => {
-      this.set('bands', bands)
-    })
+    // // TODO: don't re-fetch these, perhaps inject at route level.
+    // this.get('store').findAll('band').then(bands => {
+    //   this.set('bands', bands)
+    // })
   },
   bands: [],
   bandClass: Ember.computed('number', function() {
@@ -24,6 +24,9 @@ export default Ember.Component.extend({
   score: Ember.computed('number', function() {
     var n = this.get('number')
     return this.get('match').get(`band${n}_score`) || 0
+  }),
+  canEdit: Ember.computed('session.user', function() {
+    return !!this.get('session.user')
   }),
   actions: {
     updateScore(score) {

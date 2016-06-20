@@ -5,6 +5,16 @@ var jwt = require('jsonwebtoken')
 var bcrypt = require('bcryptjs')
 var secrets = require('../lib/secrets')
 
+router.get('/verify', (req, res, next) => {
+  var token = req.query.token
+  if (!token) return res.status(406).json({ error: 'invalid params' })
+  jwt.verify(token, secrets.jwt_secret, (err, user) => {
+    if (err) return next(err)
+    if (!user) return res.status(401).json({ error: 'invalid token' })
+    res.json(user)
+  })
+})
+
 router.post('/authenticate', (req, res, next) => {
   db('users')
     .select('*')

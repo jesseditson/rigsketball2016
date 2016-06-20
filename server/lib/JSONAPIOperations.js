@@ -61,9 +61,12 @@ module.exports.findOne = function(type, fields, filter) {
  * @return {Promise}          A promise that resolves with an object containing data (and optionally relationships)
  */
 module.exports.create = function(type, data) {
-  return new Promise((resolve, reject) => {
-    // resolve({ data: {}, related: [] })
-  })
+  var qb = db(type)
+    .insert(data.data.attributes)
+  if (data.data.relationships) {
+    // TODO: handle relationships
+  }
+  return qb
 }
 
 /**

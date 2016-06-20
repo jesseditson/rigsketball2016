@@ -1,5 +1,5 @@
-<h2>{{model.title}}</h2>
-{{#each model.matches as |match|}}
+<h2>{{model.round.title}}</h2>
+{{#each model.round.matches as |match|}}
   <div class="match">
     <div class="time">
       <p>{{match.time}}</p>
@@ -8,9 +8,9 @@
       <p>{{match.location}}</p>
     </div>
     <div class="matchup">
-      {{match-band match=match number=1}}
+      {{match-band match=match number=1 bands=model.bands}}
       <h4>vs.</h4>
-      {{match-band match=match number=2}}
+      {{match-band match=match number=2 bands=model.bands}}
     </div>
   </div>
 {{/each}}
