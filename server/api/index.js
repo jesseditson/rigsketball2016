@@ -5,6 +5,7 @@ var Promise = require('bluebird')
 var JSONAPI = require('jsonapi-express')
 var JSONAPIOperations = require('../lib/JSONAPIOperations')
 var auth = require('./auth')
+var signS3 = require('./sign-s3')
 
 JSONAPIOperations.sideEffects = {
   matches: {
@@ -16,6 +17,7 @@ JSONAPIOperations.sideEffects = {
 
 JSONAPIOperations.authorize = auth.middleware
 
+router.use(signS3)
 router.use(auth)
 
 router.use('/', JSONAPI(JSONAPIOperations, '/api'))

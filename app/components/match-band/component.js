@@ -4,6 +4,7 @@ export default Ember.Component.extend({
   classNames: ['match-band'],
   classNameBindings: ['bandClass'],
   store: Ember.inject.service(),
+  session: Ember.inject.service(),
   init() {
     this._super(...arguments)
     // TODO: don't re-fetch these, perhaps inject at route level.

@@ -6,6 +6,7 @@ export default Ember.Service.extend({
   ajax: Ember.inject.service(),
   cookies: Ember.inject.service(),
   token: null,
+  signingUp: false,
   init() {
     this._super(...arguments)
     var token = this.get('cookies').read(cookieName)

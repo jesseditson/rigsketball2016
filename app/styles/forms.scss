@@ -69,7 +69,7 @@ form {
       color: $text-color;
       input, .item {
         font-size: 1.2em;
-        width: 100%;
+        width: 100% !important;
         color: $text-color;
         &:after {
           border-color: $text-color transparent transparent transparent;

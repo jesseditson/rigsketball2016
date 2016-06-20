@@ -13,7 +13,9 @@ const requiredFields = [
 
 export default Ember.Component.extend({
   classNames: ['signup-form'],
+  ajax: Ember.inject.service(),
   store: Ember.inject.service(),
+  session: Ember.inject.service(),
   band: null,
   init() {
     this._super(...arguments)
@@ -40,15 +42,26 @@ export default Ember.Component.extend({
     })
   }),
   actions: {
-    uploadTrack(file) {
-      return file.upload('/api/upload-track').then(response => {
+    uploadFile(info) {
+      return this.get('ajax').request('/api/sign-s3', {
+        data: {
+          'file-name': info.file.name,
+          'file-type': info.file.type
+        }
+      }).then(response => {
+          return info.upload({ url: response.signedRequest, method: 'PUT' })
+      }).then(response => {
         console.log(response)
       })
     },
-    uploadImage(file) {
-      return file.upload('/api/upload-image').then(response => {
-        console.log(response)
-      })
+    createBand() {
+      this.get('band').save()
+        .then(() => {
+          this.set('session.signingUp', true)
+          this.transitionToRoute('bracket')
+        }, err => {
+          this.set('error', err)
+        })
     }
   }
 });

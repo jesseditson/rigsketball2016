@@ -63,7 +63,7 @@
   <div class="form-group">
     <label>
       track for the 2016 compilation
-      {{#pl-uploader for="upload-track" name="track-upload" extensions="mp3" onfileadd="uploadTrack" as |queue dropzone|}}
+      {{#pl-uploader for="upload-track" name="track-upload" extensions="mp3" onfileadd="uploadFile" as |queue dropzone|}}
         <div class="dropzone" id={{dropzone.id}}>
           {{#if dropzone.active}}
             {{#if dropzone.valid}}
@@ -73,7 +73,7 @@
             {{/if}}
           {{else if queue.length}}
             {{log queue.queues}}
-            <span class="progress">({{queue.progress}}%)</span>
+            <span class="progress">[{{queue.progress}}%]</span>
           {{else}}
             <a id="upload-track">[select a file]</a>
           {{/if}}
@@ -84,7 +84,7 @@
   <div class="form-group">
     <label>
       band photo
-      {{#pl-uploader for="upload-image" name="image-upload" extensions="jpg jpeg png gif" onfileadd="uploadImage" as |queue dropzone|}}
+      {{#pl-uploader for="upload-image" name="image-upload" extensions="jpg jpeg png gif" onfileadd="uploadFile" as |queue dropzone|}}
         <div class="dropzone" id={{dropzone.id}}>
           {{#if dropzone.active}}
             {{#if dropzone.valid}}
@@ -93,7 +93,7 @@
               Invalid
             {{/if}}
           {{else if queue.length}}
-            <span class="progress">({{queue.progress}}%)</span>
+            <span class="progress">[{{queue.progress}}%]</span>
           {{else}}
             <a id="upload-image">[select a file]</a>
           {{/if}}
@@ -108,6 +108,9 @@
     </label>
   </div>
   <div class="form-group button-group">
+    {{#if error}}
+      <span class="error">{{error}}</span>
+    {{/if}}
     {{input type="submit" value=buttonTitle class="button" disabled=submitDisabled}}
   </div>
 </form>
