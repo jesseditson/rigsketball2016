@@ -20,7 +20,7 @@ export default Ember.Component.extend({
   band: null,
   init() {
     this._super(...arguments)
-    this.set('band', this.get('store').createRecord('band')
+    this.set('band', this.get('store').createRecord('band'))
   },
   memberOptions: Ember.computed(function() {
     return [
