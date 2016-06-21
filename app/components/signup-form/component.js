@@ -20,16 +20,7 @@ export default Ember.Component.extend({
   band: null,
   init() {
     this._super(...arguments)
-    this.set('band', this.get('store').createRecord('band', {
-      name: 'foo',
-      website: 'http://foo.com',
-      phone: '1234567890',
-      email: 'foo@bar.com',
-      address: '123 foo st',
-      member_count: 4,
-      trackURL: 'https://s3-us-west-2.amazonaws.com/rigsketball/uploads/2bdbfdfc-e6d5-43e8-9481-6ede1a482ac6.m4a',
-      imageURL: 'https://s3-us-west-2.amazonaws.com/rigsketball/uploads/1f8a5e48-7ef4-4003-8b37-1c5cc89bc498.jpeg'
-    }))
+    this.set('band', this.get('store').createRecord('band')
   },
   memberOptions: Ember.computed(function() {
     return [

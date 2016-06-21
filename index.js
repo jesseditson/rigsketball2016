@@ -10,11 +10,11 @@ app.locals.ENV = env
 app.locals.ENV_DEVELOPMENT = env == 'development'
 app.locals.package = pkgInfo
 
+emberServer(app)
+
 app.use(express.static(path.join(process.cwd(), 'dist')))
 var indexFile = path.join(__dirname, 'dist/index.html')
 app.use((req, res) => res.sendFile(indexFile))
-
-emberServer(app)
 
 app.serve = function() {
   this.set('port', this.get('port') || process.env.PORT || 3000)
