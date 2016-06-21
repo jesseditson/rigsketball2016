@@ -6,17 +6,24 @@ const signupCookieName = 'rigsketball-signup';
 export default Ember.Service.extend({
   ajax: Ember.inject.service(),
   cookies: Ember.inject.service(),
+  store: Ember.inject.service(),
   token: null,
-  signingUp: null,
+  signingUpBand: null,
   user: null,
   clearCookie(name) {
-    this.get('cookies').write(name, null, { expires: new Date('1970-01-01') });
+    return this.get('cookies').write(name, '', { expires: new Date('1970-01-01'), path: '/' });
   },
   init() {
     this._super(...arguments)
     var c = this.get('cookies')
-    this.set('signing-up', c.read(signupCookieName))
     this.set('token', c.read(tokenCookieName))
+    var signingUpId = c.read(signupCookieName)
+    if (!isNaN(parseInt(signingUpId))) {
+      this.get('store').findRecord('band', signingUpId)
+        .then(band => {
+          this.set('signingUpBand', band)
+        })
+    }
     this.refreshUser()
   },
   refreshUser() {
@@ -30,11 +37,13 @@ export default Ember.Service.extend({
       this.set('user', null)
     })
   },
-  setSigningUp(value) {
-    if (!!value) {
-      this.get('cookies').write(signupCookieName, true)
+  setSigningUpBand(band) {
+    if (!!band) {
+      this.get('cookies').write(signupCookieName, band.get('id'), { path: '/' })
+      this.set('signingUpBand', band)
     } else {
       this.clearCookie(signupCookieName)
+      this.set('signingUpBand', null)
     }
   },
   login(email, password) {
@@ -45,7 +54,7 @@ export default Ember.Service.extend({
       }
     }).then(info => {
       this.set('token', info.token)
-      this.get('cookies').write(tokenCookieName, info.token)
+      this.get('cookies').write(tokenCookieName, info.token, { path: '/' })
       this.refreshUser()
     })
   },

@@ -5,29 +5,38 @@ export default Ember.Component.extend({
   classNameBindings: ['bandClass'],
   store: Ember.inject.service(),
   session: Ember.inject.service(),
-  init() {
-    this._super(...arguments)
-    // // TODO: don't re-fetch these, perhaps inject at route level.
-    // this.get('store').findAll('band').then(bands => {
-    //   this.set('bands', bands)
-    // })
-  },
-  bands: [],
   bandClass: Ember.computed('number', function() {
     var n = this.get('number')
     return `band${n}`
   }),
-  band: Ember.computed('match', 'number', function() {
+  band: Ember.computed('match.{band1,band2}', 'number', function() {
     var n = this.get('number')
     return this.get('match').get(`band${n}`)
+  }),
+  selectedBandId: Ember.computed('band', function() {
+    return this.get('band.id')
   }),
   score: Ember.computed('number', function() {
     var n = this.get('number')
     return this.get('match').get(`band${n}_score`) || 0
   }),
-  canEdit: Ember.computed('session.user', function() {
+  canEditScore: Ember.computed('session.user', function() {
     return !!this.get('session.user')
   }),
+  canEdit: Ember.computed('round', 'session.user', function() {
+    return this.get('round.id') === '1' && !!this.get('session.user')
+  }),
+  canSelect: Ember.computed('match.{band1,band2}', 'number', 'session.signingUpBand', function() {
+    var n = this.get('number')
+    return !this.get(`match.band${n}.id`) && this.get('session.signingUpBand')
+  }),
+  updateBand(band) {
+    console.log(band)
+    var model = this.get('match')
+    var n = this.get('number')
+    model.set(`band${n}`, band)
+    return model.save()
+  },
   actions: {
     updateScore(score) {
       var model = this.get('match')
@@ -36,9 +45,17 @@ export default Ember.Component.extend({
       model.save()
     },
     updateBand(band) {
-      var model = this.get('match')
-      var n = this.get('number')
-      model.set(`band${n}`, band)
+      this.updateBand(band)
+    },
+    chooseSpot() {
+      var band = this.get('session.signingUpBand')
+      this.updateBand(band)
+        .then(() => {
+          this.get('session').setSigningUpBand(null)
+        })
+    },
+    clear() {
+      this.updateBand(null)
     }
   }
 });

@@ -37,6 +37,10 @@ body::before {
   background-image: url('/assets/img/van.png');
 }
 
+h4 {
+  margin: 0;
+}
+
 .content {
   display: flex;
   flex-direction: column;

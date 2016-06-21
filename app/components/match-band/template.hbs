@@ -1,19 +1,30 @@
-{{#if canEdit}}
+{{#if canEditScore}}
   {{input class="score" value=score action="updateScore" on="key-up"}}
 {{else}}
-  <h4>{{score}}</h4>
+  <h4 class="score">{{score}}</h4>
 {{/if}}
-{{#unless (eq match.round.id '1')}}
-  <h4 class="band-name">{{band.name}}</h4>
-{{else}}
-  {{ember-selectize
-    content=bands
-    optionValuePath="content.id"
-    optionLabelPath="content.name"
-    placeholder="switch band"
-    name="band"
-    select-item="updateBand"
-    value=band
-  }}
-{{/unless}}
+<div class="band-name">
+  {{#if canSelect}}
+    <a {{action "chooseSpot"}}>
+      [choose spot]
+    </a>
+  {{else if canEdit}}
+    {{ember-selectize
+      content=bands
+      optionValuePath="content.id"
+      optionLabelPath="content.name"
+      placeholder="switch band"
+      name="band"
+      select-item="updateBand"
+      value=selectedBandId
+    }}
+    {{#if band.name}}
+      <a {{action "clear"}}>
+        [clear]
+      </a>
+    {{/if}}
+  {{else}}
+    <h4>{{band.name}}</h4>
+  {{/if}}
+</div>
 {{yield}}

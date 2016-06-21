@@ -51,6 +51,20 @@ module.exports.findOne = function(type, fields, filter) {
   return query(type, fields, filter).first()
 }
 
+function getAttributes(data) {
+  var relationships = data.data.relationships
+  var attributes = data.data.attributes
+  if (relationships) {
+    Object.keys(relationships)
+      .forEach(r => {
+        attributes[`${r}_id`] = relationships[r].data
+                                ? parseInt(relationships[r].data.id, 10)
+                                : relationships[r].data
+      })
+  }
+  return attributes
+}
+
 /**
  * create - create and return a new record
  * Note that this method is also expected to create relationships if specified, as per the JSONAPI spec.
@@ -61,12 +75,8 @@ module.exports.findOne = function(type, fields, filter) {
  * @return {Promise}          A promise that resolves with an object containing data (and optionally relationships)
  */
 module.exports.create = function(type, data) {
-  var qb = db(type)
-    .insert(data.data.attributes)
-  if (data.data.relationships) {
-    // TODO: handle relationships
-  }
-  return qb
+  return db(type)
+    .insert(getAttributes(data))
 }
 
 /**
@@ -78,14 +88,12 @@ module.exports.create = function(type, data) {
  * @return {Promise}          A promise that resolves with an object containing the updated object
  */
 module.exports.update = function(type, id, data) {
-  var qb = db(type)
+  var id = parseInt(id, 10)
+  return db(type)
     .where('id', id)
-    .update(data.data.attributes)
-  if (data.data.relationships) {
-    // TODO: handle relationships
-  }
-  return qb.then(() => {
-      return query(type, '*', { id: id }).first()
+    .update(getAttributes(data))
+    .then(() => {
+      return query(type, '*', { params: { id: id } }).first()
     })
 }
 
@@ -97,9 +105,9 @@ module.exports.update = function(type, id, data) {
  * @return {Promise}            A promise that resolves when the item has been deleted
  */
 module.exports.delete = function(type, id) {
-  return new Promise((resolve, reject) => {
-    // resolve()
-  })
+  return db(type)
+    .where('id', parseInt(id, 10))
+    .delete()
 }
 
 /**
@@ -117,7 +125,5 @@ module.exports.delete = function(type, id) {
  * @return {Promise}             A promise either returning `null` if the relationship(s) already existed (or did not exist), or a relationship object if a relationship was created.
  */
 module.exports.updateRelationship = function(relationship, record, data) {
-  return new Promise((resolve, reject) => {
-    // resolve(null | {})
-  })
+  throw new Error('unsupported')
 }

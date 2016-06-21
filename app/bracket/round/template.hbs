@@ -8,9 +8,9 @@
       <p>{{match.location}}</p>
     </div>
     <div class="matchup">
-      {{match-band match=match number=1 bands=model.bands}}
-      <h4>vs.</h4>
-      {{match-band match=match number=2 bands=model.bands}}
+      {{match-band match=match round=model.round number=1 bands=model.bands}}
+      <span>vs.</span>
+      {{match-band match=match round=model.round number=2 bands=model.bands}}
     </div>
   </div>
 {{/each}}

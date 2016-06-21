@@ -48,6 +48,11 @@ router.post('/authenticate', (req, res, next) => {
 })
 
 module.exports.middleware = function(req, res, next) {
+  // allow public access for get requests
+  if (req.method === 'GET') return next()
+  // allow bands to sign up and choose a spot
+  if (req.method === 'POST' && /^\/bands/.test(req.path)) return next()
+  if (req.method === 'PATCH' && /^\/matches/.test(req.path)) return next()
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
   // decode token

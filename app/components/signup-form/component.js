@@ -87,7 +87,7 @@ export default Ember.Component.extend({
     createBand() {
       this.get('band').save()
         .then(() => {
-          this.get('session').setSigningUp(true)
+          this.get('session').setSigningUpBand(this.get('band'))
           this.sendAction('completed', this.get('band'))
         }, err => {
           this.set('error', err)

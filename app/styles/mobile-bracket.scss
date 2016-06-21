@@ -2,13 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 100px;
+  width: 600px;
+  max-width: 100%;
 }
 
 .match {
   display: flex;
   width: 100%;
   flex-direction: column;
-  max-width: 600px;
   padding: 1em;
   box-sizing: border-box;
   justify-content: space-between;
@@ -16,27 +18,48 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    span {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: -2;
+    }
   }
   .match-band {
     display: flex;
     align-items: center;
-    flex-grow: 2;
+    flex-grow: 1;
+    max-width: 50%;
+    word-wrap: break-word;
     .selectize-control {
       flex-grow: 2;
+      .selectize-input {
+        z-index: 0;
+      }
     }
   }
   .band2 {
     flex-direction: row-reverse;
     justify-content: flex-end;
-    .band-name {
+    .band-name h4 {
       text-align: right;
     }
   }
   .band-name {
     margin: 0 1em;
-    flex-grow: 2;
+    width: 100%;
+    a {
+      cursor: pointer;
+    }
   }
   .score {
-    width: 1em;
+    @include bold-font;
+    width: 1.5em;
+    font-size: 1.5em;
   }
 }

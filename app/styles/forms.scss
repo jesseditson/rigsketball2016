@@ -80,6 +80,7 @@ form {
       color: $text-color;
       background-color: transparentize($bg-color, 0.05);
       border: none;
+      z-index: 10;
       .active {
         color: $text-color;
         background-color: transparentize($green-color, 0.9);
