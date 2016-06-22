@@ -39,7 +39,6 @@ export default Ember.Component.extend({
   submitDisabled: Ember.computed(`band.{${requiredFields.join(',')}}`, function() {
     return !requiredFields.every(f => {
       var v = this.get('band').get(f)
-      console.log(f, v)
       return !!v
     })
   }),

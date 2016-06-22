@@ -10,6 +10,7 @@ export default Ember.Component.extend({
   actions: {
     logout() {
       this.get('session').logout()
+      this.transitionTo('bracket')
     }
   }
 });
