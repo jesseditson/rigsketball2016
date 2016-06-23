@@ -13,7 +13,7 @@ export default Ember.Controller.extend({
     var matchInfo = fullMatchInfo(this.get('model.rounds'))
     var matches = this.get('model.rounds').find(r => {
       return r.get('id') === this.get('model.round.id')
-    }).get('matches')
+    }).get('matches').sortBy('index')
     return matches.map((match) => {
       var idx = match.get('index')
       // console.log(idx, JSON.parse(JSON.stringify(matchInfo[idx])))

@@ -9,9 +9,12 @@ var signS3 = require('./sign-s3')
 
 JSONAPIOperations.sideEffects = {
   matches: {
-    update(info) {
-      return recalculateMatches().then(() => info)
+    update: {
+      records(info) {
+        return recalculateMatches().then(() => info)
+      }
     }
+    // TODO: sort matches and relationships to matches by index.
   }
 }
 
