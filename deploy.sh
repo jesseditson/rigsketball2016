@@ -9,8 +9,11 @@ node -e "var p = require('./package.json'); delete p.devDependencies; require('f
 mv package.json _package.json
 mv package.prod.json package.json
 
+function finish {
+  mv _package.json package.json
+}
+trap finish EXIT
+
 rm -rf tmp
 now
 now alias $(pbpaste) rigsketball.com
-
-mv _package.json package.json
