@@ -23,8 +23,32 @@ function query(type, fields, filter) {
     qb.select(fields)
   }
   if (filter.params) qb.where(filter.params)
-  if (filter.query) qb.where(filter.query)
+  if (filter.query) {
+    // var include = filter.query.include
+    // if (include) {
+    //   var includeModels = include.split(',').map(s => s.trim())
+    //   // TODO: support deep includes
+    //   delete filter.query.include
+    // }
+    qb.where(filter.query)
+  }
   return qb
+  // TODO: something like this to fetch relationships. Need to pull them off the schema to find the query.
+  // .then(res => {
+  //   if (includeModels && res.length) {
+  //     return Promise.all(includeModels.map(modelName => {
+  //       db(modelName)
+  //         .select('*')
+  //         .whereIn({
+  //           `${type}_id`: res.map(r => r.id)
+  //         })
+  //         .orWhereIn({
+  //           id: res.map(r => r[])
+  //         })
+  //     }))
+  //   }
+  //   return res
+  // })
 }
 
 /**

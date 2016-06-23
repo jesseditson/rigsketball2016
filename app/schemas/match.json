@@ -1,6 +1,6 @@
 {
   "index": "number",
-  "time": "date",
+  "time": "string",
   "location": "string",
   "band1_score": "number",
   "band2_score": "number",

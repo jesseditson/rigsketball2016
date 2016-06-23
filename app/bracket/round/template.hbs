@@ -1,11 +1,19 @@
 <h2>{{model.round.title}}</h2>
-{{#each model.round.matches as |match|}}
+{{#each matchesWithInfo as |match|}}
   <div class="match">
     <div class="time">
-      <p>{{match.time}}</p>
+      {{#if canEdit}}
+        {{input type="datetime" value=match.time placeholder="Enter date/time" focus-out=(action "saveMatch" match)}}
+      {{else}}
+        <p>{{match.time}}</p>
+      {{/if}}
     </div>
     <div class="location">
-      <p>{{match.location}}</p>
+      {{#if canEdit}}
+        {{textarea value=name value=match.location focus-out=(action "saveMatch" match) placeholder="Enter Location info"}}
+      {{else}}
+        <p>{{match.location}}</p>
+      {{/if}}
     </div>
     <div class="matchup">
       {{match-band match=match round=model.round number=1 bands=model.bands}}
@@ -13,6 +21,15 @@
       {{match-band match=match round=model.round number=2 bands=model.bands}}
     </div>
   </div>
+  {{#if selectingSpot}}
+    <div class="info">
+      <p>Before you choose this spot, make sure you're available for the following rounds:</p>
+      {{#each match.info as |upcomingMatch|}}
+      <h4>{{upcomingMatch.round.title}}</h4>
+      <p>{{upcomingMatch.time}}</p>
+      <p>{{upcomingMatch.location}}</p>
+      {{/each}}
+    </div>
+  {{/if}}
 {{/each}}
-
 {{outlet}}

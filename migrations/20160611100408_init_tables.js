@@ -32,7 +32,7 @@ exports.up = function(knex, Promise) {
       table.timestamps()
       table.integer('index')
       table.string('location')
-      table.timestamp('time')
+      table.string('time')
       table.integer('round_id')
       table.foreign('round_id').references('id').inTable('rounds')
       table.integer('band1_id')
