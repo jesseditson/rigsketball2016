@@ -7,10 +7,15 @@ export default Ember.Component.extend({
   loggedIn: Ember.computed('session.user', function() {
     return !!this.get('session.user')
   }),
+  canSignUp: Ember.computed('matches', function() {
+    return this.get('matches').every(m => {
+      return m.get('band1_id') && m.get('band2_id')
+    })
+  }),
   actions: {
     logout() {
       this.get('session').logout()
-      this.sendAction('logout')
+      window.location = '/bracket'
     }
   }
 });

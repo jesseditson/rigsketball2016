@@ -6,6 +6,7 @@ var JSONAPI = require('jsonapi-express')
 var JSONAPIOperations = require('../lib/JSONAPIOperations')
 var auth = require('./auth')
 var signS3 = require('./sign-s3')
+var download = require('./download')
 
 JSONAPIOperations.sideEffects = {
   matches: {
@@ -24,6 +25,8 @@ router.use(signS3)
 router.use(auth)
 
 router.use('/', JSONAPI(JSONAPIOperations, '/api'))
+
+router.use('/', download)
 
 router.get('/recalculate-matches', (req, res, next) => {
   recalculateMatches()

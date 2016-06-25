@@ -1,7 +1,9 @@
 {{#unless (eq route "signup")}}
-  {{#link-to "signup"}}
-    <span class="button">sign up</span>
-  {{/link-to}}
+  {{#if canSignUp}}
+    {{#link-to "signup"}}
+      <span class="button">sign up</span>
+    {{/link-to}}
+  {{/if}}
 {{else}}
   <a href="javascript:history.back();">
     <span class="button">back</span>
@@ -10,6 +12,9 @@
 {{#if loggedIn}}
 <a {{action "logout"}}>
   <span class="button">log out</span>
+</a>
+<a href="/api/download">
+  <span class="button">download band info</span>
 </a>
 {{/if}}
 {{yield}}

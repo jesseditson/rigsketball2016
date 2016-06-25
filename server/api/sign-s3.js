@@ -1,5 +1,4 @@
 var express = require("express")
-var express = require('express')
 var router = module.exports = express.Router()
 var secrets = require('../lib/secrets')
 var aws = require('aws-sdk')
