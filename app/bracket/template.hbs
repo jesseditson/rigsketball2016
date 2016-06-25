@@ -2,7 +2,7 @@
   {{outlet}}
 </div>
 <nav class="round-nav">
-  {{#each model.rounds as |round|}}
+  {{#each rounds as |round|}}
     <div>
       {{#link-to 'bracket.round' round.id}}{{round.title}}{{/link-to}}
     </div>
