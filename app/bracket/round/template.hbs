@@ -1,19 +1,21 @@
 <h2>{{model.round.title}}</h2>
 {{#each matchesWithInfo as |match|}}
   <div class="match">
-    <div class="time">
-      {{#if canEdit}}
-        {{input type="datetime" value=match.time placeholder="Enter date/time" focus-out=(action "saveMatch" match)}}
-      {{else}}
-        <p>{{match.time}}</p>
-      {{/if}}
-    </div>
-    <div class="location">
-      {{#if canEdit}}
-        {{textarea value=name value=match.location focus-out=(action "saveMatch" match) placeholder="Enter Location info"}}
-      {{else}}
-        <p>{{match.location}}</p>
-      {{/if}}
+    <div class="info">
+      <div class="time">
+        {{#if canEdit}}
+          {{input type="datetime" value=match.time placeholder="Enter date/time" focus-out=(action "saveMatch" match)}}
+        {{else}}
+          <p>{{match.time}}</p>
+        {{/if}}
+      </div>
+      <div class="location">
+        {{#if canEdit}}
+          {{textarea value=name value=match.location focus-out=(action "saveMatch" match) placeholder="Enter Location info"}}
+        {{else}}
+          <p>{{match.location}}</p>
+        {{/if}}
+      </div>
     </div>
     <div class="matchup">
       {{match-band match=match round=model.round number=1 bands=model.bands}}
