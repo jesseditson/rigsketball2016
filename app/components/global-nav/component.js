@@ -8,9 +8,15 @@ export default Ember.Component.extend({
     return !!this.get('session.user')
   }),
   canSignUp: Ember.computed('matches', function() {
-    return this.get('matches').every(m => {
-      return m.get('band1_id') && m.get('band2_id')
-    })
+    // TODO: something like the below (which fails right now) to see if all the slots are full:
+    /**
+     * !this.get('matches').every(m => {
+         console.log(m.get('index'))
+         console.log(m.get('band1.id'), m.get('band2.id'))
+         return m.get('band1.id') && m.get('band2.id')
+       })
+     */
+    return false
   }),
   actions: {
     logout() {
