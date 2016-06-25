@@ -7,6 +7,22 @@
   max-width: 100%;
 }
 
+.upcoming-round {
+  margin-bottom: 1em;
+  h4 {
+    text-align: center;
+  }
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+  color: #999;
+  & > *:first-child {
+    margin-right: 2em;
+  }
+}
+
 .match {
   display: flex;
   width: 100%;
@@ -14,10 +30,18 @@
   padding: 1em;
   box-sizing: border-box;
   justify-content: space-between;
-  .info {
+  .expand-info {
+    margin-top: 1em;
     display: flex;
     justify-content: space-around;
-    color: #999;
+    a {
+      font-size: 0.7em;
+      color: #999;
+      cursor: pointer;
+      &:hover {
+        color: $green-color;
+      }
+    }
   }
   .matchup {
     display: flex;

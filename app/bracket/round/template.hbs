@@ -22,14 +22,38 @@
       <span>vs.</span>
       {{match-band match=match round=model.round number=2 bands=model.bands}}
     </div>
+    {{#unless canEdit}}
+    {{#unless selectingSpot}}
+    <div class="expand-info">
+      <a {{action "toggleInfo"}}>
+        {{#if infoOpen}}
+          [close]
+        {{else}}
+          [info]
+        {{/if}}
+      </a>
+    </div>
+    {{/unless}}
+    {{/unless}}
   </div>
-  {{#if selectingSpot}}
-    <div class="info">
-      <p>Before you choose this spot, make sure you're available for the following rounds:</p>
+  {{#if showRoundInfo}}
+    <div class="round-info">
+      {{#if selectingSpot}}
+        <p>Before you choose this spot, make sure you're available for the following rounds:</p>
+      {{/if}}
       {{#each match.info as |upcomingMatch|}}
-      <h4>{{upcomingMatch.round.title}}</h4>
-      <p>{{upcomingMatch.time}}</p>
-      <p>{{upcomingMatch.location}}</p>
+        <div class="upcoming-round">
+          <h4>
+            {{upcomingMatch.round.title}}
+            {{#if canEdit}}
+              , match {{upcomingMatch.index}}
+            {{/if}}
+          </h4>
+          <div class="info">
+            <p>{{upcomingMatch.time}}</p>
+            <p>{{upcomingMatch.location}}</p>
+          </div>
+        </div>
       {{/each}}
     </div>
   {{/if}}

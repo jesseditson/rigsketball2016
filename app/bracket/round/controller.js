@@ -5,6 +5,10 @@ export default Ember.Controller.extend({
   canEdit: Ember.computed('session.user', function() {
     return !!this.get('session.user')
   }),
+  infoOpen: false,
+  showRoundInfo: Ember.computed('selectingSpot', 'canEdit', 'infoOpen', function() {
+    return this.get('infoOpen') || this.get('selectingSpot') || this.get('canEdit')
+  }),
   selectingSpot: Ember.computed('session.signingUpBand.id', function() {
     return !!this.get('session.signingUpBand.id')
   }),
@@ -16,7 +20,6 @@ export default Ember.Controller.extend({
     }).get('matches').sortBy('time')
     return matches.map((match) => {
       var idx = match.get('index')
-      // console.log(idx, JSON.parse(JSON.stringify(matchInfo[idx])))
       match.info = matchInfo[match.get('index')]
       return match
     })
@@ -24,6 +27,9 @@ export default Ember.Controller.extend({
   actions: {
     saveMatch(match) {
       match.save()
+    },
+    toggleInfo() {
+      this.set('infoOpen', !this.get('infoOpen'))
     }
   }
 });
@@ -40,15 +46,15 @@ function fullMatchInfo(rounds) {
   var matchInfo = matches.reduce((o, m, i) => {
     var match = m
     var roundIndex = firstRoundIndex
-    var info = [m]
-    var matchIndex = m.get('index')
+    var info = []
+    var currentMatchIndex
+    var matchIndex = currentMatchIndex = m.get('index')
     while (roundIndex > 1) {
-      roundIndex = Math.floor(roundIndex / 2)
       let nextRound = roundMap[roundIndex]
-      if (!nextRound) break
-      var nextMatchIndex = Math.ceil(matchIndex / 2) - 1
-      match = nextRound.get('matches').objectAt(nextMatchIndex)
+      match = nextRound.get('matches').findBy('index', currentMatchIndex)
       info.push(match)
+      roundIndex = Math.floor(roundIndex / 2)
+      currentMatchIndex = Math.ceil(currentMatchIndex / 2)
     }
     o[matchIndex] = info
     return o
