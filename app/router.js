@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('signup');
   this.route('compilation-terms');
   this.route('login');
+  this.route('lineup');
 });
 
 export default Router;

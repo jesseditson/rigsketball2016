@@ -2,3 +2,8 @@
 <div class="content">
   {{outlet}}
 </div>
+{{#unless (eq currentRouteName 'lineup')}}
+{{#link-to 'lineup' class="lineup-badge"}}
+  <img src="https://s3-us-west-2.amazonaws.com/rigsketball/assets/Musicfest_badge%402x.png"/>
+{{/link-to}}
+{{/unless}}
