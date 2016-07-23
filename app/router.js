@@ -7,6 +7,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('bracket', function() {
+    this.route('index', { path: '/' });
     this.route('round', { path: 'round/:id' });
   });
   this.route('signup');
