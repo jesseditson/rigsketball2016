@@ -74,23 +74,25 @@ function recalculateMatches() {
     })
     .then(rounds => {
       var operations = []
-      for (var index in rounds) {
-        var round = rounds[index]
-        var roundMatches = round.matches
-        var nextRound = index / 2
-        roundMatches.forEach(m => {
-          if (!rounds[nextRound]) return
-          var winner = getWinner(m)
-          var nextMatch = rounds[nextRound].matches[Math.ceil(m.index / 2) - 1]
-          var bandPos = m.index % 2 ? 'band1_id' : 'band2_id'
-          operations.push(
-            db('matches')
-              .update({ [bandPos]: winner || null })
-              .where({ id: nextMatch.id })
-          )
-          nextMatch[bandPos] = winner
+      Object.keys(rounds)
+        .sort((a, b) => parseInt(a, 10) < parseInt(b, 10) ? 1 : -1)
+        .forEach(index => {
+          var round = rounds[index]
+          var roundMatches = round.matches
+          var nextRound = index / 2
+          roundMatches.sort((a, b) => a.index < b.index ? -1 : 1).forEach(m => {
+            if (!rounds[nextRound]) return
+            var winner = getWinner(m)
+            var nextMatch = rounds[nextRound].matches.find(nm => nm.index === Math.ceil(m.index / 2))
+            var bandPos = m.index % 2 ? 'band1_id' : 'band2_id'
+            operations.push(
+              db('matches')
+                .update({ [bandPos]: winner || null })
+                .where({ id: nextMatch.id })
+            )
+            nextMatch[bandPos] = winner
+          })
         })
-      }
       return Promise.all(operations)
     })
 }

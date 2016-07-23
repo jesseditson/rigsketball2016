@@ -2,6 +2,8 @@
 
 set -e
 
+rm -rf dev dist
+
 ember build --environment=production
 
 node -e "var p = require('./package.json'); delete p.devDependencies; require('fs').writeFileSync('package.prod.json', JSON.stringify(p, null, 2), 'utf-8');";
